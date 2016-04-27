@@ -11,7 +11,7 @@ MSF is started automatically with:
 - a connection with the local Postgres database,
 - an improved prompt with timestamping and sessions/jobs status.
 
-# Instructions
+# Build
 
 To build the container, just use this command:
 
@@ -29,7 +29,7 @@ Once the build process is over, get and enjoy a neat msf prompt with this comman
 docker run -i -t -p 9990-9999:9990-9999 debian-msf
 ```
 
-# Access to the shell
+# Shell access
 
 If for some reason, you need to access to the shell, type this command from within the msf instance :
 
