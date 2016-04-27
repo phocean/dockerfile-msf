@@ -16,7 +16,7 @@ MSF is started automatically with:
 To build the container, just use this command:
 
 ```
-docker run -d -p 80:9001 -t debian-etherpad
+docker build -t debian-msf .
 ```
 
 Docker will download the Debian image and then execute the installation steps.
