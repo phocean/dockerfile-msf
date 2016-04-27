@@ -40,7 +40,7 @@ RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 RUN /bin/bash -l -c "source /usr/local/rvm/scripts/rvm && which bundle"
 RUN /bin/bash -l -c "which bundle"
 
-# Get dependancies
+# Get dependencies
 RUN /bin/bash -l -c "BUNDLEJOBS=$(expr $(cat /proc/cpuinfo | grep vendor_id | wc -l) - 1)"
 RUN /bin/bash -l -c "bundle config --global jobs $BUNDLEJOBS"
 RUN /bin/bash -l -c "bundle install"
