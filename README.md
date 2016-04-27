@@ -6,7 +6,7 @@ This Dockerfile builds a Debian-based Docker container with Metasploit-Framework
 
 MSF is started automatically with:
 
-- all dependancies installed,
+- all dependencies installed,
 - automatic updates at startup,
 - a connection with the local Postgres database,
 - an improved prompt with timestamping and sessions/jobs status.
