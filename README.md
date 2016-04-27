@@ -1,4 +1,4 @@
-# Debian-base Metasploit Framework dockerfil
+# Metasploit Framework dockerfile
 
 # Purpose
 
