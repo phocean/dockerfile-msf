@@ -13,9 +13,13 @@ RUN apt-get update && apt-get -y install \
   ncurses-dev bison curl wget xsel postgresql \
   postgresql-contrib postgresql-client libpq-dev \
   libapr1 libaprutil1 libsvn1 \
-  libpcap-dev libsqlite3-dev libgmp3-dev
+  libpcap-dev libsqlite3-dev libgmp3-dev \
+  nasm tmux vim nmap
 
-ADD ./init.sh /usr/local/bin/init.sh
+# startup script
+ADD ./scripts/init.sh /usr/local/bin/init.sh
+# tmux configuration file
+ADD ./conf/tmux.conf /root/.tmux.conf
 
 # Get Metasploit
 WORKDIR /opt
@@ -23,11 +27,10 @@ RUN git clone https://github.com/rapid7/metasploit-framework.git msf
 WORKDIR msf
 
 # Install PosgreSQL
-ADD db.sql /tmp/
+ADD ./scripts/db.sql /tmp/
 RUN /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql"
-
 USER root
-ADD database.yml /opt/msf/config/
+ADD ./conf/database.yml /opt/msf/config/
 
 # RVM
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import
@@ -45,6 +48,13 @@ RUN /bin/bash -l -c "BUNDLEJOBS=$(expr $(cat /proc/cpuinfo | grep vendor_id | wc
 RUN /bin/bash -l -c "bundle config --global jobs $BUNDLEJOBS"
 RUN /bin/bash -l -c "bundle install"
 
-ADD config /root/.msf4/
+# Symlink tools to $PATH
+RUN for i in `ls /opt/msf/tools/*/*`; do ln -s $i /usr/local/bin/; done
+RUN ln -s /opt/msf/msf* /usr/local/bin
 
+# settings and custom scripts folder
+VOLUME /root/.msf4/
+VOLUME /tmp/data/
+
+# Starting script (DB + updates)
 CMD /usr/local/bin/init.sh

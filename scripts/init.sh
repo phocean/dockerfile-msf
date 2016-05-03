@@ -3,4 +3,5 @@
 source /usr/local/rvm/scripts/rvm
 /etc/init.d/postgresql start
 /opt/msf/msfupdate
-/opt/msf/msfconsole
+#/opt/msf/msfconsole
+/bin/bash
