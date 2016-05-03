@@ -48,7 +48,7 @@ docker run -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tm
 Explanations:
 
 - We map the port range from 9990 to 9999 to our host, to catch reverse shells back.
-- We mount the local .msf4 folder, where you can set your prompt and put custom scripts and modules, to */root/.msf4* inside the container (if you want to make some changes at runtime, beware to do it from your host, not from within the container).
+- We mount the local *.msf4* folder, where you can set your prompt and put custom scripts and modules, to */root/.msf4* inside the container (if you want to make some changes at runtime, beware to do it from your host, not from within the container).
 - Similarly, we mount a */tmp/data folder* to exchange data (a dump from a successful exploit, for instance).
 
 Of course, it is up to you to adjust it to your taste or need.
