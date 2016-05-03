@@ -74,16 +74,8 @@ Once you are done, you can stop and delete the container for good. In that case,
 docker rm <id>
 ```
 
-# Shell access
+# Use
 
-If for some reason, you need to access to the shell, type this command from within the msf instance :
+After launching the docker container, you will get a *bash* prompt.
 
-```
-/bin/bash
-```
-
-You may also launch bash from Docker:
-
-```
-docker exec -i -t debian-msf /bin/bash
-```
+From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (msfvenom, patter_offset.rb, etc.).
