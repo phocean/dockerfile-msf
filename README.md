@@ -15,6 +15,7 @@ It also includes:
 
 - tmux, to use multiple windows (msfconsole, shell, etc.) inside the container;
 - nmap, the famous network scanner (along with ncat);
+- nasm, to support custom encoders;
 - a configuration file to get an improved prompt in Metasploit, with timestamping and sessions/jobs status.
 
 # Build
