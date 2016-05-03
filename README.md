@@ -78,4 +78,4 @@ docker rm <id>
 
 After launching the docker container, you will get a *bash* prompt.
 
-From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (msfvenom, patter_offset.rb, etc.).
+From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
