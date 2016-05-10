@@ -14,7 +14,8 @@ RUN apt-get update && apt-get -y install \
   postgresql-contrib postgresql-client libpq-dev \
   libapr1 libaprutil1 libsvn1 \
   libpcap-dev libsqlite3-dev libgmp3-dev \
-  nasm tmux vim nmap
+  nasm tmux vim nmap \
+  && rm -rf /var/lib/apt/lists/*
 
 # startup script
 ADD ./scripts/init.sh /usr/local/bin/init.sh
@@ -36,8 +37,8 @@ ADD ./conf/database.yml /opt/msf/config/
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import
 RUN curl -L https://get.rvm.io | bash -s stable 
 RUN /bin/bash -l -c "rvm requirements"
-RUN /bin/bash -l -c "rvm install 2.1.9"
-RUN /bin/bash -l -c "rvm use 2.1.9 --default"
+RUN /bin/bash -l -c "rvm install 2.3.1"
+RUN /bin/bash -l -c "rvm use 2.3.1 --default"
 RUN /bin/bash -l -c "source /usr/local/rvm/scripts/rvm"
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 RUN /bin/bash -l -c "source /usr/local/rvm/scripts/rvm && which bundle"
