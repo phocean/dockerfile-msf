@@ -3,5 +3,6 @@
 source /usr/local/rvm/scripts/rvm
 /etc/init.d/postgresql start
 /opt/msf/msfupdate --git-branch master
+cd /tmp/data
 #/opt/msf/msfconsole
 /bin/bash
