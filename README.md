@@ -43,7 +43,7 @@ Note that you could adjust the init script to automatically launch Tmux with a m
 Once the build process is over, get and enjoy a neat msf prompt with this command:
 
 ```
-docker run -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data debian-msf
+docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data debian-msf
 ```
 
 Explanations:
