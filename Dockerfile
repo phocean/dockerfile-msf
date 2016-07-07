@@ -17,21 +17,10 @@ RUN apt-get update && apt-get -y install \
   nasm tmux vim nmap \
   && rm -rf /var/lib/apt/lists/*
 
-# startup script
-ADD ./scripts/init.sh /usr/local/bin/init.sh
-# tmux configuration file
-ADD ./conf/tmux.conf /root/.tmux.conf
-
 # Get Metasploit
 WORKDIR /opt
 RUN git clone https://github.com/rapid7/metasploit-framework.git msf
 WORKDIR msf
-
-# Install PosgreSQL
-ADD ./scripts/db.sql /tmp/
-RUN /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql"
-USER root
-ADD ./conf/database.yml /opt/msf/config/
 
 # RVM
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import
@@ -52,6 +41,17 @@ RUN /bin/bash -l -c "bundle install"
 # Symlink tools to $PATH
 RUN for i in `ls /opt/msf/tools/*/*`; do ln -s $i /usr/local/bin/; done
 RUN ln -s /opt/msf/msf* /usr/local/bin
+
+# Install PosgreSQL
+ADD ./scripts/db.sql /tmp/
+RUN /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql"
+USER root
+ADD ./conf/database.yml /opt/msf/config/
+
+# tmux configuration file
+ADD ./conf/tmux.conf /root/.tmux.conf
+# startup script
+ADD ./scripts/init.sh /usr/local/bin/init.sh
 
 # settings and custom scripts folder
 VOLUME /root/.msf4/
