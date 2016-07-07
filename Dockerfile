@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:jessie
 
 MAINTAINER Phocean <jc@phocean.net>
 
