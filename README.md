@@ -4,6 +4,8 @@
 
 This Dockerfile builds a Debian-based Docker container with Metasploit-Framework installed.
 
+**A quick and easy way to deploy Metasploit on any box, including Linux, MacOS or Windows!**
+
 MSF is started automatically with:
 
 - all dependencies installed,
@@ -43,7 +45,7 @@ Note that you could adjust the init script to automatically launch Tmux with a m
 Once the build process is over, get and enjoy a neat msf prompt with this command:
 
 ```bash
-docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data phocean/msf
+docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
 ```
 
 Explanations:
@@ -59,28 +61,23 @@ You can also give it full access to the host network:
 > Note that this can be **risky** as all services on your host, including those that listen on localhost, would be reachable from within the container, in case it is compromise.
 
 ```bash
-docker run --rm -it --net=host -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data phocean/msf
+docker run --rm -it --net=host -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
 ```
 
 At any time, you can exit, which only stops (suspend) the container.
 
-You can restart it anytime:
+Because of the *--rm*, the container itself is *not persistent*.
+
+Persistency is however partially made throught the mounting of your local folders (history, scripts).
+So if you want to restart a session, just re-run the docker.
+
+I find it more convenient, but if, for some reason, you prefer to keep the container, just remove the *--rm* and then you can restart the stopped container anytime:
 
 ```bash
-docker restart <id>
-
-```
-
-And then attach to it:
-
-```bash
-docker attach <id>
-```
-
-Once you are done, you can stop and delete the container for good. In that case, all you data will be lost (settings, cache, logs):
-
-```bash
-docker rm <id>
+docker restart msf
+docker attach msf
+# Later:
+docker rm msf
 ```
 
 # Use
@@ -88,3 +85,5 @@ docker rm <id>
 After launching the docker container, you will get a *bash* prompt.
 
 From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
+
+![phocean/msf](https://raw.githubusercontent.com/phocean/dockerfile-debian-metasploit/master/screenshot.png)
