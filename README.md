@@ -32,15 +32,16 @@ docker build -t phocean/msf .
 
 Docker will download the Debian image and then execute the installation steps.
 
-**Be patient, the process can be quite long the first time.**
+> Be patient, the process can be quite long the first time.
 
 Note that you may want to:
 
 - copy the *contrib/config* file to the *~/.msf4* folder to get a nice prompt.
 - customize the *conf/tmux* file, if you plan to use this tool.
 
-*The configuration of Tmux maps the keyboard as in Screen (CTRL-A). It also makes a few cosmetic changes to the status bar.
-Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
+> The configuration of Tmux maps the keyboard as in Screen (CTRL-A). It also makes a few cosmetic changes to the status bar.
+
+> Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
 
 # Run
 
