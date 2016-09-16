@@ -22,8 +22,8 @@ It also includes:
 
 To build the container, just use this command:
 
-```
-docker build -t debian-msf .
+```bash
+docker build -t phocean/msf .
 ```
 
 Docker will download the Debian image and then execute the installation steps.
@@ -42,8 +42,8 @@ Note that you could adjust the init script to automatically launch Tmux with a m
 
 Once the build process is over, get and enjoy a neat msf prompt with this command:
 
-```
-docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data debian-msf
+```bash
+docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data phocean/msf
 ```
 
 Explanations:
@@ -54,24 +54,32 @@ Explanations:
 
 Of course, it is up to you to adjust it to your taste or need.
 
+You can also give it full access to the host network:
+
+> Note that this can be **risky** as all services on your host, including those that listen on localhost, would be reachable from within the container, in case it is compromise.
+
+```bash
+docker run --rm -it --net=host -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data phocean/msf
+```
+
 At any time, you can exit, which only stops (suspend) the container.
 
 You can restart it anytime:
 
-```
+```bash
 docker restart <id>
 
 ```
 
 And then attach to it:
 
-```
+```bash
 docker attach <id>
 ```
 
 Once you are done, you can stop and delete the container for good. In that case, all you data will be lost (settings, cache, logs):
 
-```
+```bash
 docker rm <id>
 ```
 
