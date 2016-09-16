@@ -6,6 +6,8 @@ This Dockerfile builds a Debian-based Docker container with Metasploit-Framework
 
 **A quick and easy way to deploy Metasploit on any box, including Linux, MacOS or Windows!**
 
+![phocean/msf](https://raw.githubusercontent.com/phocean/dockerfile-debian-metasploit/master/screenshot.png)
+
 MSF is started automatically with:
 
 - all dependencies installed,
@@ -86,4 +88,3 @@ After launching the docker container, you will get a *bash* prompt.
 
 From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
 
-![phocean/msf](https://raw.githubusercontent.com/phocean/dockerfile-debian-metasploit/master/screenshot.png)
