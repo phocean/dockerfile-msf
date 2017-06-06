@@ -26,8 +26,8 @@ WORKDIR msf
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import
 RUN curl -L https://get.rvm.io | bash -s stable 
 RUN /bin/bash -l -c "rvm requirements"
-RUN /bin/bash -l -c "rvm install 2.3.1"
-RUN /bin/bash -l -c "rvm use 2.3.1 --default"
+RUN /bin/bash -l -c "rvm install 2.4.1"
+RUN /bin/bash -l -c "rvm use 2.4.1 --default"
 RUN /bin/bash -l -c "source /usr/local/rvm/scripts/rvm"
 RUN /bin/bash -l -c "gem install bundler"
 RUN /bin/bash -l -c "source /usr/local/rvm/scripts/rvm && which bundle"
