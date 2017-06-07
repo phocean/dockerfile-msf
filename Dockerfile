@@ -19,7 +19,7 @@ RUN apt-get update && apt-get -y install \
 
 # Get Metasploit
 WORKDIR /opt
-RUN git clone https://github.com/rapid7/metasploit-framework.git msf
+RUN git clone https://github.com/rapid7/metasploit-framework.git msf -o upstream
 WORKDIR msf
 
 # RVM
@@ -56,6 +56,10 @@ ADD ./scripts/init.sh /usr/local/bin/init.sh
 # settings and custom scripts folder
 VOLUME /root/.msf4/
 VOLUME /tmp/data/
+
+# git settings for msfupdate
+RUN git config --global user.name "msf"
+RUN git config --global user.email "msf@example.com"
 
 # Starting script (DB + updates)
 CMD /usr/local/bin/init.sh
