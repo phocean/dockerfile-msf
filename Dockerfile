@@ -43,4 +43,4 @@ VOLUME /tmp/data/
 ENV LANG C.UTF-8
 
 # Starting script (DB + updates)
-CMD /usr/local/bin/init.sh
+CMD "init.sh"
