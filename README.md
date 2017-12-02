@@ -128,6 +128,6 @@ Note that you may want to:
 
 Thanks to contributors that helped this project:
 
-* (Lenny Zeltser)[https://github.com/lennyzeltser]
-* (llyus)[https://github.com/pierrickv]
-* (r0mdau)[https://github.com/r0mdau]
+* [Lenny Zeltser](https://github.com/lennyzeltser)
+* [llyus](https://github.com/pierrickv)
+* [r0mdau](https://github.com/r0mdau)
