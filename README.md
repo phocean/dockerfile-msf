@@ -124,4 +124,10 @@ Note that you may want to:
 
 > Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
 
+# Contributors
 
+Thanks to contributors that helped this project:
+
+* (Lenny Zeltser)[https://github.com/lennyzeltser]
+* (llyus)[https://github.com/pierrickv]
+* (r0mdau)[https://github.com/r0mdau]
