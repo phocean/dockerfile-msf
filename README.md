@@ -22,34 +22,36 @@ It also includes:
 - nasm, to support custom encoders;
 - a configuration file to get an improved prompt in Metasploit, with timestamping and sessions/jobs status.
 
-# Build
+# Use
 
-To build the container, just use this command:
+The image is built every day by Docker Hub, upon the Dockerfile of my github repository.
+
+The image is based on Ubuntu LTS and the nighly builds Metasploit repository.
+
+Also note that the image is signed (trusted content) so that the integrity of each layer in the image is checked.
+
+You can get the image with this simple command:
 
 ```bash
-docker build -t phocean/msf .
+docker pull phocean/msf
 ```
 
-Docker will download the Debian image and then execute the installation steps.
+This command will download the image and you should have it available in your local image repository:
 
-> Be patient, the process can be quite long the first time.
+```bash
+docker images
+```
 
-Note that you may want to:
-
-- copy the *contrib/config* file to the *~/.msf4* folder to get a nice prompt.
-- customize the *conf/tmux* file, if you plan to use this tool.
-
-> The configuration of Tmux maps the keyboard as in Screen (CTRL-A). It also makes a few cosmetic changes to the status bar.
-
-> Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
 
 # Run
 
-Once the build process is over, get and enjoy a neat msf prompt with this command:
+Now, you can enjoy a neat msf prompt with this command:
 
 ```bash
 docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
 ```
+
+From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
 
 Explanations:
 
@@ -83,9 +85,43 @@ docker attach msf
 docker rm msf
 ```
 
-# Use
+# Keep it up-to-date
 
-After launching the docker container, you will get a *bash* prompt.
+The image is built daily from Docker Hub, so for example I use a crontab entry to keep it up-to-date:
 
-From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
+```
+*/5 * * * *     root      docker pull phocean/msf
+```
+
+Alternatively, you can keep all your images (not only phocean/msf) with such a command:
+
+```
+/usr/bin/docker images | awk '(NR>1) && ($2!~/none/) {print $1":"$2}' | xargs -L1 docker pull 2>&1 > /dev/null
+```
+
+Finally, you can choose to build it manually with the steps described below.
+
+# Build
+
+If for some reason, including trust, you prefer to build the container, just use this command:
+
+```bash
+docker build -t phocean/msf .
+```
+
+Alternatively, you can use the provided `start.sh` script.
+
+Docker will download the Debian image and then execute the installation steps.
+
+> Be patient, the process can be quite long the first time.
+
+Note that you may want to:
+
+- copy the *contrib/config* file to the *~/.msf4* folder to get a nice prompt.
+- customize the *conf/tmux* file, if you plan to use this tool.
+
+> The configuration of Tmux maps the keyboard as in Screen (CTRL-A). It also makes a few cosmetic changes to the status bar.
+
+> Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
+
 
