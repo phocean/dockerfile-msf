@@ -32,13 +32,4 @@ VOLUME /tmp/data/
 # Locales for tmux
 ENV LANG C.UTF-8
 
-# Setting ENV to use msf scripts directly (pattern_offset, etc.)
-ENV EXPLTOOLS=/opt/metasploit-framework/embedded/framework/tools/exploit
-ENV SCRIPTDIR=/opt/metasploit-framework/bin
-ENV EMBEDDED=$SCRIPTDIR/../embedded
-ENV BIN=$EMBEDDED/bin
-ENV FRAMEWORK=$EMBEDDED/framework
-ENV PATH=$EMBEDDED/framework:$BIN:$SCRIPTDIR:$EXPLTOOLS:$PATH
-
-
 CMD "init.sh"
