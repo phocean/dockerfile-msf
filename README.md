@@ -66,7 +66,13 @@ You can also give it full access to the host network:
 > Note that this can be **risky** as all services on your host, including those that listen on localhost, would be reachable from within the container, in case it is compromise.
 
 ```bash
-docker run --rm -it --net=host -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+docker run --rm -it --net=host --hostname msf -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+```
+
+When you need extra terminals besides, use an alias such as:
+
+```bash
+docker exec -it msf /bin/bash
 ```
 
 At any time, you can exit, which only stops (suspend) the container.
