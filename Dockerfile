@@ -6,8 +6,6 @@ MAINTAINER Phocean <jc@phocean.net>
 COPY ./scripts/db.sql /tmp/
 COPY ./conf/database.yml /usr/share/metasploit-framework/config/
 
-# Tmux configuration file
-COPY ./conf/tmux.conf /root/.tmux.conf
 # Startup script
 COPY ./scripts/init.sh /usr/local/bin/init.sh
 
@@ -16,7 +14,7 @@ RUN apt-get update \
   && apt-get install -y \
     curl postgresql postgresql-contrib postgresql-client \
     apt-transport-https \
-    nmap tmux nasm \
+    nmap nasm \
   && /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql" \
   && curl -fsSL https://apt.metasploit.com/metasploit-framework.gpg.key | apt-key add - \
   && echo "deb https://apt.metasploit.com/ jessie main" >> /etc/apt/sources.list \
