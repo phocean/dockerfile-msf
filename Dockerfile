@@ -14,7 +14,7 @@ RUN apt-get update \
   && apt-get install -y \
     curl postgresql postgresql-contrib postgresql-client \
     apt-transport-https gnupg2\
-    nmap \
+    nmap nasm\
   && /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql" \
   && curl -fsSL https://apt.metasploit.com/metasploit-framework.gpg.key | apt-key add - \
   && echo "deb https://apt.metasploit.com/ jessie main" >> /etc/apt/sources.list \
