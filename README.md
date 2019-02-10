@@ -48,7 +48,7 @@ docker images
 Now, you can enjoy a neat msf prompt with this command:
 
 ```bash
-docker run --rm -i -t -p 9990-9999:9990-9999 -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+docker run --rm -i -t -p 9990-9999:9990-9999 -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
 ```
 
 From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
@@ -66,7 +66,7 @@ You can also give it full access to the host network:
 > Note that this can be **risky** as all services on your host, including those that listen on localhost, would be reachable from within the container, in case it is compromise.
 
 ```bash
-docker run --rm -it --net=host --hostname msf -v /home/<USER>/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+docker run --rm -it --net=host --hostname msf -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
 ```
 
 When you need extra terminals besides, use an alias such as:
