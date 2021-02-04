@@ -25,6 +25,7 @@ RUN apt-get -qq update \
   && git fetch --tags \
   && latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) \
   && git checkout $latestTag \
+  && rm Gemfile.lock \
   && bundle install \
   && /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql" \
   && apt-get -y remove --purge build-essential patch ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
