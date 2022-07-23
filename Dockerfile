@@ -1,8 +1,8 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
-MAINTAINER Phocean <jc@phocean.net>
+LABEL MAINTAINERS="Romain Dauby <github.com/r0mdau>"
 
-ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # PosgreSQL DB
 COPY ./scripts/db.sql /tmp/
@@ -14,7 +14,9 @@ WORKDIR /opt
 
 # Installation
 RUN apt-get -qq update \
-  && apt-get -yq install --no-install-recommends build-essential patch ruby-bundler ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
+  && apt-get -yq install --no-install-recommends \
+    build-essential patch ruby-bundler ruby-dev zlib1g-dev liblzma-dev \
+    git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
     postgresql postgresql-contrib postgresql-client \
     ruby python \
     dialog apt-utils \
@@ -26,6 +28,7 @@ RUN apt-get -qq update \
   && latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) \
   && git checkout $latestTag \
   && rm Gemfile.lock \
+  && gem install bundler \
   && bundle install \
   && /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql" \
   && apt-get -y remove --purge build-essential patch ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
