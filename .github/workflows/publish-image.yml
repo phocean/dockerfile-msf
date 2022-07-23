@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and publish image
 
 on:
   push:
@@ -6,13 +6,13 @@ on:
 
 jobs:
 
-  build:
+  publish:
 
     runs-on: ubuntu-latest
 
     steps:
-    
-    - name: Check Out Repo 
+
+    - name: Check Out Repo
       uses: actions/checkout@v2
 
     - name: Login to Docker Hub
@@ -35,4 +35,4 @@ jobs:
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/msf:latest
 
     - name: Image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}      
+      run: echo ${{ steps.docker_build.outputs.digest }}
