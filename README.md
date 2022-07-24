@@ -6,7 +6,7 @@ This Dockerfile builds a Debian-based Docker container with Metasploit-Framework
 
 **A quick and easy way to deploy Metasploit on any box, including Linux, MacOS or Windows!**
 
-![phocean/msf](https://raw.githubusercontent.com/phocean/dockerfile-debian-metasploit/master/screenshot.png)
+![img-msf](screenshot.png)
 
 MSF is started automatically with:
 
@@ -33,7 +33,7 @@ Also note that the image is signed (trusted content) so that the integrity of ea
 You can get the image with this simple command:
 
 ```bash
-docker pull phocean/msf
+docker pull r0mdau/msf
 ```
 
 This command will download the image and you should have it available in your local image repository:
@@ -48,7 +48,7 @@ docker images
 Now, you can enjoy a neat msf prompt with this command:
 
 ```bash
-docker run --rm -i -t -p 9990-9999:9990-9999 -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+docker run --rm -i -t -p 9990-9999:9990-9999 -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf r0mdau/msf
 ```
 
 From there, you can start *msfconsole*, *tmux* or any other Metasploit tool (*msfvenom*, *pattern_offset.rb*, etc.).
@@ -66,7 +66,7 @@ You can also give it full access to the host network:
 > Note that this can be **risky** as all services on your host, including those that listen on localhost, would be reachable from within the container, in case it is compromise.
 
 ```bash
-docker run --rm -it --net=host --hostname msf -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf phocean/msf
+docker run --rm -it --net=host --hostname msf -v $HOME/.msf4:/root/.msf4 -v /tmp/msf:/tmp/data --name msf r0mdau/msf
 ```
 
 When you need extra terminals besides, use an alias such as:
@@ -96,10 +96,10 @@ docker rm msf
 The image is built daily from Docker Hub, so for example I use a crontab entry to keep it up-to-date:
 
 ```
-*/5 * * * *     root      docker pull phocean/msf
+*/5 * * * *     root      docker pull r0mdau/msf
 ```
 
-Alternatively, you can keep all your images (not only phocean/msf) with such a command:
+Alternatively, you can keep all your images (not only r0mdau/msf) with such a command:
 
 ```
 /usr/bin/docker images | awk '(NR>1) && ($2!~/none/) {print $1":"$2}' | xargs -L1 docker pull 2>&1 > /dev/null
@@ -112,7 +112,7 @@ Finally, you can choose to build it manually with the steps described below.
 If for some reason, including trust, you prefer to build the container, just use this command:
 
 ```bash
-docker build -t phocean/msf .
+docker build -t r0mdau/msf .
 ```
 
 Alternatively, you can use the provided `start.sh` script.
