@@ -130,6 +130,20 @@ Note that you may want to:
 
 > Note that you could adjust the init script to automatically launch Tmux with a msf window and a bash one, for instance. I don't make it the default, because I don't want to bother people who don't need/want Tmux.*
 
+# Verify signature
+
+The docker image [r0mdau/msf](https://hub.docker.com/repository/docker/r0mdau/msf) is :
+
+* built and pushed to [docker hub](https://hub.docker.com/repository/docker/r0mdau/msf) with a github [action](.github/workflows/publish-image.yml)
+* signed with [Cosign](https://github.com/sigstore/cosign) from the [Sigstore](https://www.sigstore.dev/) project
+
+To verify the signature, simply download the [public key](cosign.pub) and run :
+
+```
+docker pull r0mdau/msf
+cosign verify --key cosign.pub r0mdau/msf
+```
+
 # Contributors
 
 Thanks to contributors that helped this project:

@@ -1,8 +1,8 @@
-name: Build and publish image
+name: Build, publish and sign image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
 
@@ -36,3 +36,13 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
+
+    - name: Install Cosign
+      uses: sigstore/cosign-installer@main
+
+    - name: Cosign sign image with a key
+      run: cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
+      env:
+        TAGS: ${{ secrets.DOCKER_HUB_USERNAME }}/msf@${{ steps.docker_build.outputs.digest }}
+        COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
+        COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
