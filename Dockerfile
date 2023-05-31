@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:latest
 
 MAINTAINER Phocean <jc@phocean.net>
 
@@ -10,15 +10,15 @@ COPY ./scripts/db.sql /tmp/
 # Startup script
 COPY ./scripts/init.sh /usr/local/bin/init.sh
 
-WORKDIR /opt
+# conf
+COPY ./contrib/tmux.conf /root/.tmux.conf
+COPY ./contrib/vimrc /root/.vimrc
 
 # Installation
 RUN apt-get -qq update \
   && apt-get -yq install --no-install-recommends build-essential patch ruby-bundler ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
-    postgresql postgresql-contrib postgresql-client \
-    ruby python \
-    dialog apt-utils \
-    nmap nasm\
+    postgresql postgresql-contrib postgresql-client dialog apt-utils \
+    ruby nmap nasm tmux vim \
   && echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
   && git clone https://github.com/rapid7/metasploit-framework.git \
   && cd metasploit-framework \
@@ -27,9 +27,8 @@ RUN apt-get -qq update \
   && git checkout $latestTag \
   && rm Gemfile.lock \
   && bundle install \
-  && /etc/init.d/postgresql start && su postgres -c "psql -f /tmp/db.sql" \
-  && apt-get -y remove --purge build-essential patch ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev \
-  dialog apt-utils \
+  && /etc/init.d/postgresql start && chmod 666 /tmp/db.sql && su - postgres -c "psql -f /tmp/db.sql" \
+  && apt-get -y remove --purge build-essential patch ruby-dev zlib1g-dev liblzma-dev git autoconf build-essential libpcap-dev libpq-dev libsqlite3-dev dialog apt-utils \
   && apt-get -y autoremove \
   && apt-get -y clean \
   && rm -rf /var/lib/apt/lists/*
