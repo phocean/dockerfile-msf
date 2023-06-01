@@ -1,8 +1,12 @@
 name: Docker Image CI
 
 on:
+  schedule:
+    - cron: '39 18 * * *'
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
 
