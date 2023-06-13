@@ -1,5 +1,23 @@
 # Metasploit Framework dockerfile
 
+# Use by Simspace
+
+This repository provides a version locked Docker image with the Metasploit-Framework installed.
+
+The purpose is to provide a stable version locked Metasploit image that can be easily updated.
+
+# Why version lock
+
+**Reproducibility: A specific version will always represent the same state. If you use latest, you might get different results at different points in time as the latest tag updates. This could lead to unexpected behavior if the latest version includes breaking changes.
+
+**Stability: Depending on the latest tag can introduce instability in your application if the newer versions of your base images introduce bugs, break backward compatibility, or change their behavior in unexpected ways.
+
+**Debugging and Troubleshooting: If a problem arises in the production, it will be easier to debug if you know exactly which versions of every component were in use. With the latest tag, you might not even know which version was in use when the problem occurred.
+
+**Security: Although using the latest version may seem like a good idea from a security perspective (as it may include patches for recent vulnerabilities), it could also introduce new vulnerabilities. It's generally better to periodically update the versions you use, after testing that the new version doesn't break your application or introduce new vulnerabilities.
+
+# Existing Documentation
+
 # Purpose
 
 This Dockerfile builds a Debian-based Docker container with Metasploit-Framework installed.

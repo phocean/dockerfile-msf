@@ -1,6 +1,4 @@
-FROM ubuntu:latest
-
-MAINTAINER Phocean <jc@phocean.net>
+FROM ubuntu:22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -23,8 +21,8 @@ RUN apt-get -qq update \
   && git clone https://github.com/rapid7/metasploit-framework.git \
   && cd metasploit-framework \
   && git fetch --tags \
-  && latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) \
-  && git checkout $latestTag \
+  && lockedTag="6.3.20" \
+  && git checkout $lockedTag \
   && rm Gemfile.lock \
   && bundle install \
   && /etc/init.d/postgresql start && chmod 666 /tmp/db.sql && su - postgres -c "psql -f /tmp/db.sql" \
