@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:23.10
 
 MAINTAINER Phocean <jc@phocean.net>
 
@@ -13,6 +13,8 @@ COPY ./scripts/init.sh /usr/local/bin/init.sh
 # conf
 COPY ./contrib/tmux.conf /root/.tmux.conf
 COPY ./contrib/vimrc /root/.vimrc
+
+WORKDIR /opt/
 
 # Installation
 RUN apt-get -qq update \
@@ -42,6 +44,6 @@ VOLUME /tmp/data/
 
 # Locales for tmux
 ENV LANG C.UTF-8
-WORKDIR /opt/metasploit-framework
+WORKDIR /opt/metasploit-framework/
 
 CMD "init.sh"
